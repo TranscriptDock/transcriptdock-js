@@ -1,0 +1,59 @@
+{
+  "name": "transcriptdock",
+  "version": "0.1.0",
+  "description": "JavaScript and TypeScript client for the Transcript Dock video transcription API. No runtime dependencies.",
+  "keywords": [
+    "transcriptdock",
+    "transcription",
+    "transcript",
+    "youtube",
+    "tiktok",
+    "instagram",
+    "captions",
+    "subtitles",
+    "api-client"
+  ],
+  "homepage": "https://www.transcriptdock.com/docs",
+  "bugs": {
+    "url": "https://github.com/TranscriptDock/transcriptdock-js/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TranscriptDock/transcriptdock-js.git"
+  },
+  "license": "MIT",
+  "author": "Transcript Dock <transcriptdock@volods.com>",
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/cjs/index.js",
+  "types": "./dist/cjs/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/esm/index.d.ts",
+        "default": "./dist/esm/index.js"
+      },
+      "require": {
+        "types": "./dist/cjs/index.d.ts",
+        "default": "./dist/cjs/index.js"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "prepack": "node scripts/build.mjs"
+  },
+  "devDependencies": {
+    "typescript": "6.0.3"
+  }
+}
