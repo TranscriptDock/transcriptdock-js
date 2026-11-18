@@ -362,7 +362,14 @@ export class TranscriptDock {
       if (TERMINAL.includes(job.status)) return job;
       remaining = (deadline - performance.now()) / 1000;
       if (remaining <= 0) throw new JobTimeoutError(job);
-      await sleep(Math.min(pollInterval, remaining));
+      // Timers can wake a fraction of a millisecond early. When the next poll
+      // would start at the deadline, wait it out and stop instead of sending a
+      // request that has almost no time left.
+      if (pollInterval >= remaining) {
+        await sleep(remaining);
+        throw new JobTimeoutError(job);
+      }
+      await sleep(pollInterval);
     }
   }
 }
